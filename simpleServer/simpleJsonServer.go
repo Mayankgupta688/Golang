@@ -23,9 +23,7 @@ func ShowBooks(w http.ResponseWriter, r *http.Request) {
 		{"C", 30},
 	}
 
-	newEmp := Employee{"D", 40}
-
-	employeeList = append(employeeList, newEmp)
+	employeeList = append(employeeList, Employee{"D", 40})
 
 	js, err := json.Marshal(employeeList)
 	if err != nil {
