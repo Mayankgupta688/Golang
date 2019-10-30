@@ -27,6 +27,9 @@ func GetIndexPage(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 }
 
 func PostsCreateHandler(rw http.ResponseWriter, r *http.Request, p httprouter.Params) {
+
+	// This can be used to get the parameters from the URL...
+
 	id := p.ByName("id")
 	rw.Write([]byte(r.FormValue("userName") + " Value: " + id))
 }
