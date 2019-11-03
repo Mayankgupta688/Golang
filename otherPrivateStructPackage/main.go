@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Golang/otherPrivateStructPackage/privatepackage"
+	"Golang/privateStructPackage/privatepackage"
 	"fmt"
 )
 
