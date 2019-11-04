@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>{{ .PageTitle }}</title>
+        <link rel="stylesheet" href="./css/staticStyle.css">
+    </head>
+    <body>
+        <ul>
+            {{range .Todos}}
+                {{if .Done}}
+                    <li class="done">Task Done: {{.Title}}</li>
+                {{else}}
+                    <li>Task Undone: {{.Title}}</li>
+                {{end}}
+            {{end}}
+        </ul>
+    </body>
+</html>
