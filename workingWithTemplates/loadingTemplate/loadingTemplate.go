@@ -1,23 +1,33 @@
-package main 
+package main
 
-import "html/template"
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+	"path"
+	"text/template"
+)
 
-func main() {
-	customTemplates := populateTemplates()
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		requestedFile := r.URL.Path[1:]
-		templateFile := customTemplates.Lookup(requestedFile + ".html")
-		templateFile.Execute(w, nil)
-	})
-
-	http.ListenAndServe(":4000", nil)
+type TodoPageData struct {
+	PageTitle string
+	Todos     []Todo
 }
 
+type Todo struct {
+	Title string
+	Done  bool
+}
 
-func populateTemplates() *template.Template {
-	customTemplates := template.New("customTemplates")
-	template.Must(customTemplates.ParseGlob("template" + "/*.html"))
-	return customTemplates
+func main() {
+	http.HandleFunc("/", ShowTemplateWithData)
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+	http.ListenAndServe(":8000", nil)
+}
+
+func ShowTemplateWithData(w http.ResponseWriter, r *http.Request) {
+
+	fp := path.Join("template", "index.html")
+
+	fmt.Println(fp)
+	tmpl, _ := template.ParseFiles(fp)
+	tmpl.Execute(w, nil)
 }

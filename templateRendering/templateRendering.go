@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"path"
 	"text/template"
+	"fmt"
 )
 
 type TodoPageData struct {
@@ -33,6 +34,8 @@ func ShowTemplateWithData(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 	fp := path.Join("template", "sample.html")
+
+	fmt.Println(fp)
 	tmpl, _ := template.ParseFiles(fp)
 	tmpl.Execute(w, data)
 }
